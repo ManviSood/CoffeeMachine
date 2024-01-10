@@ -17,6 +17,7 @@ def report():
 
 
 def check_sufficient_resources(type_of_coffee):
+    """Returns True when order can be made, False if ingredients are insufficient"""
     water = MENU[type_of_coffee]['ingredients']['water']
     coffee = MENU[type_of_coffee]['ingredients']['coffee']
     if type_of_coffee == "espresso":
@@ -41,6 +42,7 @@ def check_sufficient_resources(type_of_coffee):
 
 
 def process_coins():
+    """Returns the total_cost calculated from coins inserted """
     print("Please insert coins.")
     quarters = (int(input("how many quarters?: ")) * 0.25)
     dimes = (int(input("how many dimes?: ")) * 0.10)
@@ -51,17 +53,18 @@ def process_coins():
 
 
 # TODO: 6. Check Transaction
-def check_transaction_successful(cost1, money1):
+def check_transaction_successful(money_received, drink_cost):
+    """Returns True when the money is accepted or False if money is insufficient"""
     coffee_cost = MENU[coffee_type]['cost']
-    if cost1 < coffee_cost:
+    if money_received < coffee_cost:
         print("Sorry that's not enough money.Money refunded.")
-        return money1, False
+        return drink_cost, False
 
     change = round((cost - coffee_cost), 2)
-    money1 += coffee_cost
-    # print(f"Money made:{money1}, Change: {change} ")
+    drink_cost += coffee_cost
+    # print(f"Money made:{drink_cost}, Change: {change} ")
     print(f"Here is ${change} dollars in change.")
-    return money1, True
+    return drink_cost, True
 
 
 # TODO: 7. Make coffee
